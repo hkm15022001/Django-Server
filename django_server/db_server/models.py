@@ -41,8 +41,8 @@ class TrackAndTrace(models.Model):
     status = models.CharField(max_length=10)
     speed = models.FloatField(max_length=10)
     direction = models.CharField(max_length=50)
-    longitude = models.DecimalField(max_digits=10, decimal_places=10, default=0)
-    latitude = models.DecimalField(max_digits=10,decimal_places=10, default=0)
+    longitude = models.FloatField(max_length=10)
+    latitude = models.FloatField(max_length=10)
     extra_info = models.JSONField()
     def __str__(self):
         return self.track_and_trace_id

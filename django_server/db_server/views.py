@@ -4,7 +4,7 @@ from rest_framework import generics
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializers import UserSerializer, RegisterSerializer, DeviceSerializer, TrackAndTraceSerializer
-
+from rest_framework.exceptions import NotFound
 
 class UserCreate(generics.CreateAPIView):
     # API endpoint that allows creation of a new User
@@ -104,20 +104,26 @@ class TrackAndTraceCreate(generics.CreateAPIView):
 
 class TrackAndTraceList(generics.ListAPIView):
     # API endpoint that allows TrackAndTrace to be viewed.
-    queryset = Device.objects.all()
-    serializer_class = DeviceSerializer
-
-
-class TrackAndTraceDetail(generics.RetrieveAPIView):
+    queryset = TrackAndTrace.objects.all()
     serializer_class = TrackAndTraceSerializer
+
+
+class TrackAndTraceDetailList(generics.ListAPIView):
+    serializer_class = TrackAndTraceSerializer
+    lookup_field = 'device_id'
     def get_queryset(self):
         queryset = TrackAndTrace.objects.all()
         # Loop through all URL parameters and filter the queryset
-        for param, value in self.kwargs.items():
-            if param != 'pk':  # Exclude the primary key from filtering
-                # Use double underscores for field lookups (e.g., field_name=value)
+        for param, value in self.request.query_params.items():
+            if param != 'limit':
                 queryset = queryset.filter(**{param: value})
-        return queryset
+        limit = int(self.request.query_params.get('limit', 100)) #default to 10
+        total_objects = queryset.count()
+        if limit > total_objects:
+            limit = total_objects
+        else:
+            queryset = queryset.order_by('-id')
+        return queryset[:limit]
 
 
 class TrackAndTraceUpdate(generics.RetrieveUpdateAPIView):
