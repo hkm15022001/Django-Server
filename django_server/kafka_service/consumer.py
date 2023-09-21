@@ -23,6 +23,7 @@ def kafka_consumer():
                 print('Error: %s' % msg.error())
         else:
             print('Received message: %s' % msg.value())
+            
 
     consumer.close()
 
