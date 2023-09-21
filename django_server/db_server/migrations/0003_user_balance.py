@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('db_server', '0002_rename_device_model_device_and_more'),
+        ("db_server", "0002_rename_device_model_device_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='balance',
+            model_name="user",
+            name="balance",
             field=models.DecimalField(decimal_places=2, default=0, max_digits=10),
         ),
     ]
