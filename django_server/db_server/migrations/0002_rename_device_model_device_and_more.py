@@ -4,18 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('db_server', '0001_initial'),
+        ("db_server", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='device_model',
-            new_name='Device',
+            old_name="device_model",
+            new_name="Device",
         ),
         migrations.RenameModel(
-            old_name='registername',
-            new_name='Register',
+            old_name="registername",
+            new_name="Register",
         ),
     ]
