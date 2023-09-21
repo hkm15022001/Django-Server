@@ -35,7 +35,8 @@ class Device(models.Model):
 
     def __str__(self):
         return self.device_id
-    
+
+
 class TrackAndTrace(models.Model):
     device_id = models.ForeignKey(Device, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True, blank=True)
@@ -45,5 +46,6 @@ class TrackAndTrace(models.Model):
     longitude = models.FloatField(max_length=10)
     latitude = models.FloatField(max_length=10)
     extra_info = models.JSONField()
+
     def __str__(self):
         return self.track_and_trace_id

@@ -1,9 +1,11 @@
 from confluent_kafka import Consumer, KafkaError
+
+
 def kafka_consumer():
     kafka_config = {
-        'bootstrap.servers': 'localhost:29092',
-        'group.id': 'django-server',
-        'auto.offset.reset': 'earliest'
+        "bootstrap.servers": "localhost:29092",
+        "group.id": "django-server",
+        "auto.offset.reset": "earliest",
     }
 
     topic = "alo"
@@ -18,14 +20,14 @@ def kafka_consumer():
             continue
         if msg.error():
             if msg.error().code() == KafkaError._PARTITION_EOF:
-                print('Reached end of partition')
+                print("Reached end of partition")
             else:
-                print('Error: %s' % msg.error())
+                print("Error: %s" % msg.error())
         else:
-            print('Received message: %s' % msg.value())
-            
+            print("Received message: %s" % msg.value())
 
     consumer.close()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     kafka_consumer()
