@@ -13,6 +13,8 @@ SECRET_KEY = "django-insecure-n+$2ku%&*ncasgy0!yj_q)cay$#d31qj(c%$(_%)x7rai-rnkh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+APPEND_SLASH = False
+
 ALLOWED_HOSTS = []
 
 
@@ -78,8 +80,12 @@ DATABASES = {
         "PASSWORD": "123",
         "HOST": "localhost",
         "PORT": "5432",
+        "OPTIONS": {
+            "options": "-c search_path=user_db",
+        },
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
