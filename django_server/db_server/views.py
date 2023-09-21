@@ -6,7 +6,7 @@ from .serializers import UserSerializer, RegisterSerializer, DeviceSerializer
 
 class UserCreate(generics.CreateAPIView):
     # API endpoint that allows creation of a new User
-    queryset = User.objects.all(),
+    queryset = (User.objects.all(),)
     serializer_class = UserSerializer
 
 
@@ -32,6 +32,3 @@ class UserDelete(generics.RetrieveDestroyAPIView):
     # API endpoint that allows a User record to be deleted.
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-
