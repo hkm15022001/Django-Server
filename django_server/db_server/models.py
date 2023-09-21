@@ -21,6 +21,7 @@ class User(models.Model):
 class Register(models.Model):
     token = models.CharField(max_length=15, primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    service = models.CharField(max_length=50)
 
     def __str__(self):
         return self.token
