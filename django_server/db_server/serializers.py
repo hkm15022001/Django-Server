@@ -17,12 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
             "user_role",
         ]
 
-<<<<<<< HEAD
 class RegisterSerializer(serializers.ModelSerializer):    
-=======
-
-class RegisterSerializer(serializers.ModelSerializer):
->>>>>>> 4dd1177351ba760c9aad5bf907ab760d4ed1f8c4
     class Meta:
         model = Register
         fields = ["token", "user_id"]
