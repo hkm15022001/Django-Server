@@ -1,6 +1,4 @@
 from confluent_kafka import Consumer, KafkaError
-
-
 def kafka_consumer():
     kafka_config = {
         "bootstrap.servers": "localhost:29092",
@@ -8,7 +6,7 @@ def kafka_consumer():
         "auto.offset.reset": "earliest",
     }
 
-    topic = "alo"
+    topic = "TrackAndTrace"
 
     consumer = Consumer(kafka_config)
 
@@ -24,7 +22,8 @@ def kafka_consumer():
             else:
                 print("Error: %s" % msg.error())
         else:
-            print("Received message: %s" % msg.value())
+            print('Received message: %s' % msg.value())
+            
 
     consumer.close()
 
