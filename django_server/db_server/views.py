@@ -4,7 +4,6 @@ from rest_framework import generics
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializers import UserSerializer, RegisterSerializer, DeviceSerializer, TrackAndTraceSerializer
-from rest_framework.exceptions import NotFound
 
 class UserCreate(generics.CreateAPIView):
     # API endpoint that allows creation of a new User
@@ -113,16 +112,16 @@ class TrackAndTraceDetailList(generics.ListAPIView):
     lookup_field = 'device_id'
     def get_queryset(self):
         queryset = TrackAndTrace.objects.all()
+        queryset = queryset.order_by('-id')
+        valid_field_names = [field.name for field in TrackAndTrace._meta.get_fields()]
         # Loop through all URL parameters and filter the queryset
         for param, value in self.request.query_params.items():
-            if param != 'limit':
+            if param != 'limit' and param in valid_field_names:
                 queryset = queryset.filter(**{param: value})
-        limit = int(self.request.query_params.get('limit', 100)) #default to 10
+        limit = int(self.request.query_params.get('limit', 20)) #default to 20
         total_objects = queryset.count()
         if limit > total_objects:
             limit = total_objects
-        else:
-            queryset = queryset.order_by('-id')
         return queryset[:limit]
 
 
