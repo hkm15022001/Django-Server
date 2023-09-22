@@ -8,7 +8,7 @@ server_url = "http://localhost:8000/user_service/register/create"
 # Gửi 1 batch lớn
 
 services = ['TrackAndTrace', 'SmartHome', 'SmartFarm', 'PowerSaving', 'CMP']
-
+register_number=20
 def generate_random_register_data(user_id):
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=15))
     service = random.choice(services)  # Randomly select a service from the list
@@ -19,7 +19,7 @@ def generate_random_register_data(user_id):
     }
     return register_data
 
-register_data_list = [generate_random_register_data(user_id) for user_id in range(100)]
+register_data_list = [generate_random_register_data(user_id) for user_id in range(register_number)]
 
 response = requests.post(server_url, json=register_data_list)
 
@@ -42,7 +42,7 @@ else:
 #     }
 #     return register_data
 
-# for user_id in range(100):
+# for user_id in range(register_number):
 #     register_data = generate_random_register_data(user_id)
 #     response = requests.post(server_url, json=register_data)
 #     if response.status_code == 201:

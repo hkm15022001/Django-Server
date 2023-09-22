@@ -5,7 +5,7 @@ import string
 
 server_url = "http://localhost:8000/user_service/device/create"
 
-
+user_number=20
 # Gửi 1 batch lớn
 
 def generate_random_device_data(user_id):
@@ -28,7 +28,7 @@ def generate_random_device_data(user_id):
 
 all_devices_data = []
 
-for user_id in range(100):
+for user_id in range(user_number):
     device_data = generate_random_device_data(user_id)
     all_devices_data.extend(device_data)
 
@@ -42,7 +42,7 @@ else:
 
 # Gửi lần lượt từng cái
 
-# number_of_devices = 100
+
 # def generate_random_device_data(user_id):
 #     device_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
 #     device_name = ''.join(random.choices(string.ascii_letters, k=10))
@@ -55,7 +55,7 @@ else:
 #     }
 #     return device_data
 
-# for user_id in range(number_of_devices):
+# for user_id in range(user_number):
 #     device_data = generate_random_device_data(user_id)
 #     response = requests.post(server_url, json=device_data)
 #     if response.status_code == 201:

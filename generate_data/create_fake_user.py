@@ -3,8 +3,8 @@ import random
 import string
 
 
-server_url = "http://localhost:8000/user_service/device/create"
-
+server_url = "http://localhost:8000/user_service/user/create"
+user_number=20
 # Function to generate random data for the user
 def generate_random_user_data(user_id):
     username = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
@@ -26,7 +26,7 @@ def generate_random_user_data(user_id):
     }
     return user_data
 
-for i in range(100):
+for i in range(user_number):
     user_data = generate_random_user_data(i)
     response = requests.post(server_url, json=user_data)
     if response.status_code == 201:
