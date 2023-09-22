@@ -7,5 +7,5 @@ startup_signal = Signal()
 # register revicer function
 @receiver(startup_signal)
 def on_startup(sender, **kwargs):
-    # call reciever funciton
+    # call receiver function
     kafka_consumer()
